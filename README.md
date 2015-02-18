@@ -136,7 +136,7 @@ console.log(mustang.display());
 #### Variables have a memory slot for their values.  
 
 - The variable's memory slot will contain the value if the value is a primitive. **It can be accessed "by value"**  
-- The variable's memory slot will contain a pointer to the value if the value is reference object (not a primitive).  **It can be accessed "by reference"**
+- The variable's memory slot will contain a pointer to an object if the value is an object (not a primitive).  **It can be accessed "by reference"**
 - This memory slot will contain 'undefined' if you haven't set it's value.  
 
 The Memory looks like this after the above code is executed.   
@@ -175,11 +175,96 @@ Variable         | Memory          |
 
 #### Variables have a scope, i.e. an excecution context.
 
-All variables have scope. See scope.js for more info.
-And watch Advanced Javascript from Frontend Masters.
+All variables have scope. *(More later)*
 
 ## Pass by Reference OR Pass by Value.
 
 Learn the difference between "pass by value" and "pass by reference" and when and how "side effects" can occur. 
 
 [Pass by Reference/Value](PassByValueRef.md)
+
+## Variable Scope
+Right now we're going to concentrate on Scope.
+Scope is sometimes called excecution context.
+
+[Variable Scope]](VariableScope.md)
+
+### Creating your own scope.
+
+We're going to use scope to create a private scope to work in.
+We won't have to worry about our variable identifiers conflictin with others in the global namespace.
+
+We're going to use the IIFE pattern. A very common pattern in javascript.
+
+```
+(function doIt(){
+  console.log("Bing Bong");
+};
+
+setInterval(doIt, 2000);
+
+(function ringBell(){
+  var msg = "Ding Dong";
+
+  function doIt(){
+    console.log(msg);
+  };
+  // setTimeout(doIt, 1000);
+  setInterval(doIt, 1000);
+
+})();
+```
+
+## Closure
+
+Closure is the property of function such that it can access variables is the same scope it was declared in. Even when that function is operating outside of that scope.
+
+
+```
+function makeAdder(x) {
+  // makeAdder function scope contains the variable 'x'
+  
+  // The return value of makeAdder is a function.
+
+  // In Javascript functions are first-class. They can be
+  // passed into or returned from other functions.
+  return function(y) {
+    return x + y;
+  };
+}
+
+// add5 will be the function declared inside and retuned from makeAdder.
+var add5 = makeAdder(5);
+
+// Same here but will add ten. Funky huh?
+var add10 = makeAdder(10);
+
+// When we execute the function that add5 is pointing to, remember it was declared inside of makeAdder. This function will have access the x variable in makeAdder function.
+console.log(add5(2));  // 7
+console.log(add10(2)); // 12
+```
+
+The key to understanding closure is to know that a function declared in some scope can **ALWAYS** access other variables declared in the same scope.!
+
+
+## Lab.
+Write the steps for add5(2). Like we did for Scope above.
+
+## Demo
+
+```
+function showName (firstName, lastName) {
+  var nameIntro = "Your name is ";
+
+  // this inner function has access to the outer function's variables, including the parameter
+  function makeFullName(){ 
+                          return nameIntro + firstName + " " + lastName; 
+                         };
+
+  return makeFullName(); 
+};
+
+// Your name is Michael Jackson
+console.log(showName ("Michael", "Jackson"));
+ 
+```

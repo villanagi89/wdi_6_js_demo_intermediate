@@ -1,7 +1,7 @@
-var year = 1931,
-    paid = true,
-    manager,
-    moe = {
+var year = 1931, // primitive
+    paid = true, // primitive
+    manager,     // undefined
+    moe = {      // pointer
       name: "Moe Howard",
       age: 34
     },
@@ -11,7 +11,7 @@ var year = 1931,
     },
     venue;
 
-function Venue(name, city){
+function Venue(name, city){ // pointer to a fuction in memory it stores the code itself.
   this.name = name;
   this.city = city;
 }

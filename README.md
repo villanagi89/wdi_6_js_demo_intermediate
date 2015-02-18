@@ -8,6 +8,7 @@
 * Know the parts of a javascript variable.
 * Learn the difference between "pass by value" and "pass by reference" and when and how "side effects" can occur. 
 * Know how variable scope, i.e. execution context, is constructed and used.
+* Understand the IFFE pattern.
 * Understand how functions can be passed and returned from functions.
 * Understand closure.
 
@@ -172,6 +173,10 @@ Variable         | Memory          |
 
 ```
 
+#### Lab
+
+Build a view of memory for after js/stooges.js is run. Work in groups. Make sure you know what variables have primitive values and what variables have objects, instances of reference types.
+
 
 #### Variables have a scope, i.e. an excecution context.
 
@@ -197,22 +202,30 @@ We won't have to worry about our variable identifiers conflictin with others in 
 We're going to use the IIFE pattern. A very common pattern in javascript.
 
 [IFFE Pattern](http://adripofjavascript.com/blog/drips/understanding-the-module-pattern-in-javascript.html)
+
 [Ben Alman IFFE Pattern](http://benalman.com/news/2010/11/immediately-invoked-function-expression/)
 
 ```
-(function doIt(){
+// declare doIt function in Global scope
+function doIt(){
   console.log("Bing Bong");
 };
 
+// Run doIt every two seconds.
 setInterval(doIt, 2000);
 
-(function ringBell(){
+// Create a IFFE to prevent 
+// name collisions between doIt functions.
+(function(){
+  // declare msg in IFFE scope
   var msg = "Ding Dong";
 
+  // declare doIt function in IFFE scope
   function doIt(){
     console.log(msg);
   };
-  // setTimeout(doIt, 1000);
+
+  // run this function every 1 second
   setInterval(doIt, 1000);
 
 })();
@@ -222,52 +235,5 @@ setInterval(doIt, 2000);
 
 Closure is the property of function such that it can access variables is the same scope it was declared in. Even when that function is operating outside of that scope.
 
+[Closure](Closure.md)
 
-```
-function makeAdder(x) {
-  // makeAdder function scope contains the variable 'x'
-  
-  // The return value of makeAdder is a function.
-
-  // In Javascript functions are first-class. They can be
-  // passed into or returned from other functions.
-  return function(y) {
-    return x + y;
-  };
-}
-
-// add5 will be the function declared inside and retuned from makeAdder.
-var add5 = makeAdder(5);
-
-// Same here but will add ten. Funky huh?
-var add10 = makeAdder(10);
-
-// When we execute the function that add5 is pointing to, remember it was declared inside of makeAdder. This function will have access the x variable in makeAdder function.
-console.log(add5(2));  // 7
-console.log(add10(2)); // 12
-```
-
-The key to understanding closure is to know that a function declared in some scope can **ALWAYS** access other variables declared in the same scope.!
-
-
-## Lab.
-Write the steps for add5(2). Like we did for Scope above.
-
-## Demo
-
-```
-function showName (firstName, lastName) {
-  var nameIntro = "Your name is ";
-
-  // this inner function has access to the outer function's variables, including the parameter
-  function makeFullName(){ 
-                          return nameIntro + firstName + " " + lastName; 
-                         };
-
-  return makeFullName(); 
-};
-
-// Your name is Michael Jackson
-console.log(showName ("Michael", "Jackson"));
- 
-```

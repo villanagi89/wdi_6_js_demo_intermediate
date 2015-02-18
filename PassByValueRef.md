@@ -72,6 +72,29 @@ console.log("name2 is " + name2); // tom
 
 
 ```
+
+## Lab
+
+Draw a memory model for 
+
+```
+var jill = 'jill',
+    jill_age = 35,
+    joe = 'joe',
+    joe_age = 55;
+
+console.log('Joe is ' + joe_age);
+console.log('Jill is ' + jill_age);
+
+joe_age  = jill_age;
+jill_age = 33;
+
+console.log('Joe is ' + joe_age);
+console.log('Jill is ' + jill_age);
+
+// Draw the memory model.
+```
+
 ## Objects always "Pass by Reference"
 
 That's why they are called reference types/objects.
@@ -130,6 +153,39 @@ console.log("person2.name is " + person2.name);  // "jill"
 */
 
 ```
+
+## Lab 
+Draw the Memory Model for 
+
+```
+var jill = {
+  name: 'jill',
+  age: 35 
+  },
+  joe = {
+    name: 'joe',
+    age: 55
+  };
+console.log(joe.name + ' is ' + joe.age);
+console.log(jill.name + ' is ' + jill.age);
+
+var person1 = joe,
+person2 = jill;
+
+console.log('person1 name is ' + person1.name + ", age is " + person1.age);
+console.log('person2 name is ' + person2.name + ", age is " + person2.age);
+
+jill.age = 44;
+joe.age = 66;
+
+// See how changing jill and joe's age changed 
+// person1 and person 2 ages.
+console.log('person1 name ' + person1.name + ", age is " + person1.age);
+console.log('person2 name ' + person2.name + ", age is " + person2.age);console.log(person2.name + ' is ' + person2.age);
+
+
+```
+
 
 ## Passing Arguments to Functions.
 

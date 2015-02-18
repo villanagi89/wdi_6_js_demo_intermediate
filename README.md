@@ -27,7 +27,7 @@ Some common properties of primitives are:
 
 * The are immutable, they can't be changed.
 * You can't add properties to primitives. 
-* They are [passed by value](app/js/pass_by_ref.js). *(More later)*  
+* They are [passed by value](js/pass_by_ref.js). *(More later)*  
 
 
 ## Reference Types.
@@ -45,7 +45,7 @@ Some common properties of reference type are:
 
 * The are mutable, they CAN be changed.
 * You CAN add properties to them.
-* They are [passed by reference](app/js/pass_by_ref.js). *(More later)*  
+* They are [passed by reference](js/pass_by_ref.js). *(More later)*  
 
 
 ##  What are variables?  

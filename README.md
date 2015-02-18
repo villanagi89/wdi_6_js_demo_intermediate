@@ -187,7 +187,7 @@ Learn the difference between "pass by value" and "pass by reference" and when an
 Right now we're going to concentrate on Scope.
 Scope is sometimes called excecution context.
 
-[Variable Scope]](VariableScope.md)
+[Variable Scope](VariableScope.md)
 
 ### Creating your own scope.
 
@@ -195,6 +195,9 @@ We're going to use scope to create a private scope to work in.
 We won't have to worry about our variable identifiers conflictin with others in the global namespace.
 
 We're going to use the IIFE pattern. A very common pattern in javascript.
+
+[IFFE Pattern](http://adripofjavascript.com/blog/drips/understanding-the-module-pattern-in-javascript.html)
+[Ben Alman IFFE Pattern](http://benalman.com/news/2010/11/immediately-invoked-function-expression/)
 
 ```
 (function doIt(){
